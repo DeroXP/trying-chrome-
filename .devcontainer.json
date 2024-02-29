@@ -1,0 +1,17 @@
+{
+  "name": "Go Docker",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "golang"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.go",
+        "lukehoban.go"
+      ]
+    }
+  }
+}
