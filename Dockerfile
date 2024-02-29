@@ -34,3 +34,17 @@ COPY /root /
 EXPOSE 3000
 
 VOLUME /config
+
+FROM golang:1.18 as builder
+
+WORKDIR /app
+COPY
+RUN go get -d -v github.com/gin-gonic/gin
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo
+
+FROM alpine:latest
+RUN apk add --no-cache ca-certificates
+WORKDIR /app
+COPY --from=builder /app/main /app/
+EXPOSE 8080
+CMD ["/app/main"]
